@@ -79,7 +79,7 @@
                 android:textSize="@dimen/newsMoreTextSize">
             </TextView>
 
-            <com.google.android.material.progressindicator.CircularProgressIndicator
+            <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
                 android:id="@+id/cirLoginButton"
                 style="@style/loginButton"
                 android:layout_gravity="center_horizontal"
