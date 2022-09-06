@@ -114,7 +114,21 @@
                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
-
+                    <Button
+                        android:id="@+id/btnRegister"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Register"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    <TextView
+                        android:id="@+id/tvSwitchToLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:linksClickable="true"
+                        android:text="Login"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textColor="#052DF8" />
 <!--                    <CircularProgressButton-->
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
