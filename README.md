@@ -1,2 +1,2 @@
-# Android-Animated-Login-Registration
+# Android Mobile App for Stonelia
  
