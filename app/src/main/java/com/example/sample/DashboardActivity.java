@@ -15,6 +15,8 @@ public class DashboardActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        setContentView(R.layout.activity_dashboard);
     }
 
 }
