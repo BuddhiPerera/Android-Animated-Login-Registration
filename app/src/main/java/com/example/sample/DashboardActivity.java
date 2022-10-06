@@ -48,6 +48,18 @@ public class DashboardActivity extends AppCompatActivity {
                 switchToCamera();
             }
         });
+        RelativeLayout relativeClickMap = (RelativeLayout) findViewById(R.id.dashboardMap);
+        relativeClickMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToMap();
+            }
+        });
+    }
+
+    private void switchToMap() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo: 4377.3 2005.789"));
+        startActivity(intent);
     }
 
     private void switchToProfile() {
