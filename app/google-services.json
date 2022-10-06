@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "260818029402",
+    "project_id": "stonelia",
+    "storage_bucket": "stonelia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260818029402:android:a173514082e21747b80163",
+        "android_client_info": {
+          "package_name": "com.example.sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260818029402-q3epnv7l05ppntmdcdivd5hlmcc6su5f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXXaKfHvO6kq4yOaHiqAWqbLkx2driULg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260818029402-q3epnv7l05ppntmdcdivd5hlmcc6su5f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

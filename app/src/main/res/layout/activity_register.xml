@@ -124,6 +124,7 @@
 
                     <TextView
                         style="@style/parent"
+                        android:id="@+id/tvSwitchToLogin"
                         android:layout_marginTop="@dimen/loginViewsMargin"
                         android:onClick="onLoginClick"
                         android:text="Already have an Account?"
