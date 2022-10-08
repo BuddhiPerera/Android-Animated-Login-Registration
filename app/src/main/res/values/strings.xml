@@ -8,7 +8,13 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string name="title_gallery">Gallery</string>
+    <string name="title_camera">Camera</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+        <!--Replace with your public/private keys to use UploadcareWidget. Private key is optional, required only if you use Rest API features.-->
+        <string name="uploadcare_public_key" translatable="false">6c37d1cf7ea0f23ed7c0</string>
+        <string name="uploadcare_private_key" translatable="false">9b74c7ae22a49f7f59c7</string>
+    <string name="todo">TODO</string>
 </resources>

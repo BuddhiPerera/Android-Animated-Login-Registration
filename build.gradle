@@ -1,6 +1,10 @@
 buildscript {
+    repositories {
+        google()
+    }
     dependencies {
         classpath 'com.google.gms:google-services:4.3.14'
+        classpath 'com.android.tools.build:gradle:3.2.1'
     }
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
@@ -10,4 +14,15 @@ plugins {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    compileSdkVersion = 28
+    buildToolsVersion = '28.0.3'
+    androidXLibraryVersion = '1.0.0'
+
+    PUBLISH_GROUP_ID = 'com.theartofdev.edmodo'
+    PUBLISH_ARTIFACT_ID = 'android-image-cropper'
+    PUBLISH_VERSION = '2.8.0'
+    // gradlew clean build generateRelease
 }

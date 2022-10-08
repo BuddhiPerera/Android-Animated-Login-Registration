@@ -45,7 +45,9 @@ public class DashboardActivity extends AppCompatActivity {
         relativeClickCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switchToCamera();
+//                switchToCamera();
+               switchToCamera2();
+
             }
         });
         RelativeLayout relativeClickMap = (RelativeLayout) findViewById(R.id.dashboardMap);
@@ -55,6 +57,12 @@ public class DashboardActivity extends AppCompatActivity {
                 switchToMap();
             }
         });
+    }
+
+    private void switchToCamera2() {
+        Intent intent = new Intent(this, FileUploadActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void switchToMap() {
@@ -77,7 +85,7 @@ public class DashboardActivity extends AppCompatActivity {
                 String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
                 requestPermissions(permission, PERMISSION_CODE);
             } else {
-                openCamera();
+               openCamera();
             }
         } else {
 
