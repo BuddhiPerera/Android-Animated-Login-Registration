@@ -241,7 +241,7 @@
                         android:layout_below="@id/cycle"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:text="Option 1"
+                        android:text="Website"
                         android:textSize="24sp"
                         app:fontFamily="sans-serif" />
 
@@ -251,7 +251,7 @@
                         android:layout_height="75dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/ic__340039_tourist_car_icon" />
+                        app:srcCompat="@drawable/ic__219582_web_development_maintenance_construction_teamwork_icon" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
