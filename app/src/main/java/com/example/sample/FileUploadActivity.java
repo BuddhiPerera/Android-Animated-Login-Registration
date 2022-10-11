@@ -70,8 +70,8 @@ public class FileUploadActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (CheckPermission()) {
-                    Intent m_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(m_intent, 0);
+//                    Intent m_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                    startActivityForResult(m_intent, 0);
                     dispatchTakePictureIntent();
                 }
             }
@@ -130,18 +130,11 @@ public class FileUploadActivity extends AppCompatActivity {
         switch (requestCode) {
             case 0: {
                 if (resultCode == RESULT_OK) {
-                 /*   Bundle extras = data.getExtras();
-                    Bitmap imageBitmap = (Bitmap) extras.get("data");
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                    imageView.setImageBitmap(imageBitmap);
-*/
+
                     System.out.println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
                     File file = new File(String.valueOf(mPhotoFile));
                     imageView.setImageURI(Uri.fromFile(file));
-//                    Uri uri = data.getData();
-//                    Context context = FileUploadActivity.this;
-//                    path = RealPathUtil.getRealPath(context, uri);
+
                     try {
                         System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                         UploadImage(String.valueOf(mPhotoFile));
@@ -203,19 +196,6 @@ public class FileUploadActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
-         requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("UPLOADCARE_PUB_KEY", "6c37d1cf7ea0f23ed7c0")
-                .build();
-        MultipartBody.Part parts = MultipartBody.Part.createFormData("image", file.getPath(), requestBody);
-
-        RequestBody someData = RequestBody.create(MediaType.parse("multipart/form-data"), "This is a new Image");
-
-        UploadApis uploadApis = retrofit.create(UploadApis.class);
-        Call call = uploadApis.uploadImage(parts, someData);
-       */
     }
 
     public boolean CheckPermission() {
