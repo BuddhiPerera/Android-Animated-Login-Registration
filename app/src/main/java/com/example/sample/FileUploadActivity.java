@@ -1,6 +1,7 @@
 package com.example.sample;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -28,6 +33,8 @@ import com.example.sample.model.SourceData;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -64,11 +71,8 @@ public class FileUploadActivity extends AppCompatActivity {
 
                 if (CheckPermission()) {
                     Intent m_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    File file = new File(Environment.getExternalStorageDirectory(), "MyPhoto.jpg");
-                    Context context = FileUploadActivity.this;
-                    Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", file);
-                    m_intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, uri);
                     startActivityForResult(m_intent, 0);
+                    dispatchTakePictureIntent();
                 }
             }
         });
@@ -84,36 +88,67 @@ public class FileUploadActivity extends AppCompatActivity {
         });
     }
 
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(this.getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                // Error occurred while creating the File
+            }
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.example.sample.provider",
+                        photoFile);
+
+                mPhotoFile = photoFile;
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, REQUEST_CAMERA_PHOTO);
+            }
+        }
+    }
+
+    File mPhotoFile;
+
+    static final int REQUEST_CAMERA_PHOTO =0;
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String mFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File mFile = File.createTempFile(mFileName, ".jpg", storageDir);
+        return mFile;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
-
             case 0: {
-                System.out.println(resultCode + " SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSss");
                 if (resultCode == RESULT_OK) {
-                    Bundle extras = data.getExtras();
+                 /*   Bundle extras = data.getExtras();
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                     imageView.setImageBitmap(imageBitmap);
-        /*            try {
-                        Uri imageUri = data.getData();
-                        imageView.setImageBitmap(imageBitmap);
-//                        progressDialog.show();
-                        Context context = FileUploadActivity.this;
-                        path = RealPathUtil.getRealPath(context, imageUri);
-                        System.out.println(imageUri+" ");
-                        UploadImage(path);
-                        Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                        imageView.setImageBitmap(bitmap);
-////                        progressDialog.show();
-//                        UploadImage(path);
+*/
+                    System.out.println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+                    File file = new File(String.valueOf(mPhotoFile));
+                    imageView.setImageURI(Uri.fromFile(file));
+//                    Uri uri = data.getData();
+//                    Context context = FileUploadActivity.this;
+//                    path = RealPathUtil.getRealPath(context, uri);
+                    try {
+                        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                        UploadImage(String.valueOf(mPhotoFile));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    */
+
                 }
             }
             break;
