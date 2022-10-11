@@ -1,7 +1,8 @@
 package com.example.sample;
 
 import android.Manifest;
-import android.app.Activity;
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,10 +17,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -30,7 +27,6 @@ import androidx.core.content.FileProvider;
 
 import com.example.sample.model.SourceData;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -51,6 +47,7 @@ public class FileUploadActivity extends AppCompatActivity {
     ImageView imageView;
     Button camera, gallery;
     String path;
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -61,8 +58,8 @@ public class FileUploadActivity extends AppCompatActivity {
         camera = findViewById(R.id.btn_camera);
         gallery = findViewById(R.id.btn_gallery);
         imageView = findViewById(R.id.imageViews);
-//        progressDialog = new ProgressDialog(FileUploadActivity.this);
-//        progressDialog.setMessage("Image Uploading...");
+        progressDialog = new ProgressDialog(FileUploadActivity.this);
+        progressDialog.setMessage("Image Uploading...");
 
         //Add permission for camera
         camera.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +113,7 @@ public class FileUploadActivity extends AppCompatActivity {
     static final int REQUEST_CAMERA_PHOTO =0;
     private File createImageFile() throws IOException {
         // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        @SuppressLint("SimpleDateFormat") String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String mFileName = "JPEG_" + timeStamp + "_";
         File storageDir = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File mFile = File.createTempFile(mFileName, ".jpg", storageDir);
@@ -131,17 +128,14 @@ public class FileUploadActivity extends AppCompatActivity {
             case 0: {
                 if (resultCode == RESULT_OK) {
 
-                    System.out.println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
                     File file = new File(String.valueOf(mPhotoFile));
                     imageView.setImageURI(Uri.fromFile(file));
-
+                    progressDialog.show();
                     try {
-                        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                         UploadImage(String.valueOf(mPhotoFile));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                 }
             }
             break;
@@ -153,7 +147,7 @@ public class FileUploadActivity extends AppCompatActivity {
                         path = RealPathUtil.getRealPath(context, uri);
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                         imageView.setImageBitmap(bitmap);
-//                        progressDialog.show();
+                        progressDialog.show();
                         UploadImage(path);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -181,23 +175,34 @@ public class FileUploadActivity extends AppCompatActivity {
 
                 SourceData SourceData = response.body();
                 Log.v("Response code:", "" + response.body());
-                System.out.println("_________________________________________-----");
+                System.out.println("_________________________________________________________");
                 assert SourceData != null;
+                progressDialog.cancel();
                 System.out.println(SourceData.getSourcefile().get_id() + "\n " + SourceData.getSourcefile().getSource_link()
                         + " \n" + SourceData.getSourcefile().getCategory() + "\n "
                         + SourceData.getSourcefile().getName() + " \n"
-                        + SourceData.getSourcefile().getDate()
-                );
+                        + SourceData.getSourcefile().getDate());
+                switchToProfile(SourceData);
             }
 
             @Override
             public void onFailure(Call<SourceData> call, Throwable t) {
+                progressDialog.cancel();
                 Log.e("Upload error:", t.getMessage());
             }
         });
-
     }
 
+    private void switchToProfile(SourceData sourceData) {
+        Intent intent = new Intent(this, ResponseActivity.class);
+        intent.putExtra("name",sourceData.getSourcefile().getName());
+        intent.putExtra("source_link",sourceData.getSourcefile().getSource_link());
+        intent.putExtra("category",sourceData.getSourcefile().getCategory());
+        intent.putExtra("_id",sourceData.getSourcefile().get_id());
+        intent.putExtra("date",sourceData.getSourcefile().getDate());
+        startActivity(intent);
+        finish();
+    }
     public boolean CheckPermission() {
 
         if (ContextCompat.checkSelfPermission(FileUploadActivity.this,
