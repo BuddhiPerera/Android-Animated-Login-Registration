@@ -29,7 +29,6 @@
         android:textColor="@color/themeColor"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:paddingLeft="85dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +36,7 @@
         app:layout_constraintVertical_bias="0.781"
         tools:ignore="MissingConstraints" />
 
-    <Button
+    <com.apachat.loadingbutton.core.customViews.CircularProgressButton
         android:id="@+id/btn_camera"
         style="@style/loginButton"
         android:layout_width="150dp"
@@ -52,7 +51,7 @@
         app:layout_constraintVertical_bias="0.901"
         tools:ignore="UsingOnClickInXml" />
 
-    <Button
+    <com.apachat.loadingbutton.core.customViews.CircularProgressButton
         android:id="@+id/btn_gallery"
         style="@style/loginButton"
         android:layout_width="150dp"
