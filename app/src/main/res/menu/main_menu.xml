@@ -46,5 +46,25 @@
 
     </group>
 
-    <item android:title=""></item>
+    <item android:title="Communicate">
+
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_baseline_share_24"
+                android:title="Share" />
+
+            <item
+                android:id="@+id/nav_rate"
+                android:icon="@drawable/ic_baseline_star_rate_24"
+                android:title="Rate Us" />
+
+            <item
+                android:id="@+id/nav_website"
+                android:icon="@drawable/ic_baseline_web_24"
+                android:title="Visit Us" />
+
+        </menu>
+
+    </item>
 </menu>

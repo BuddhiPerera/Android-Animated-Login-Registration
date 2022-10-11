@@ -16,6 +16,6 @@ public interface UploadApis {
 //    @Headers({
 //            "Content-Type: application/json"
 //    })
-    @POST("/upload")
+    @POST("upload")
     Call<ResponseBody> uploadImage(@Part MultipartBody.Part image);
 }
