@@ -23,9 +23,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
-import com.android.volley.toolbox.JsonObjectRequest;
-
-import org.json.JSONObject;
+import com.example.sample.model.SourceData;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -33,9 +31,7 @@ import java.io.IOException;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,11 +43,8 @@ public class FileUploadActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     ImageView imageView;
     Button camera, gallery;
-    OkHttpClient client = new OkHttpClient();
-    //    private ProgressDialog progressDialog;
     String path;
-    private JSONObject jsonObject;
-    private JsonObjectRequest jsonObjectRequest;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +91,7 @@ public class FileUploadActivity extends AppCompatActivity {
         switch (requestCode) {
 
             case 0: {
-                System.out.println(resultCode + "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSss");
+                System.out.println(resultCode + " SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSss");
                 if (resultCode == RESULT_OK) {
                     Bundle extras = data.getExtras();
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
@@ -111,7 +104,7 @@ public class FileUploadActivity extends AppCompatActivity {
 //                        progressDialog.show();
                         Context context = FileUploadActivity.this;
                         path = RealPathUtil.getRealPath(context, imageUri);
-                        System.out.println(imageUri+"RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRrr");
+                        System.out.println(imageUri+" ");
                         UploadImage(path);
                         Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                         imageView.setImageBitmap(bitmap);
@@ -119,9 +112,9 @@ public class FileUploadActivity extends AppCompatActivity {
 //                        UploadImage(path);
                     } catch (IOException e) {
                         e.printStackTrace();
-                    }*/
+                    }
+                    */
                 }
-                //capture
             }
             break;
             case 1: {
@@ -147,24 +140,30 @@ public class FileUploadActivity extends AppCompatActivity {
     private void UploadImage(String imageUri) throws IOException {
         File file = new File(imageUri);
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part image = MultipartBody.Part.createFormData("/*", file.getName(), requestFile);
+        MultipartBody.Part image = MultipartBody.Part.createFormData("uploadFile", file.getName(), requestFile);
 
         Retrofit retrofit = NetworkClient.getRetrofit();
         UploadApis uploadApis = retrofit.create(UploadApis.class);
-        Call<ResponseBody> call = uploadApis.uploadImage(image);
+        Call<SourceData> call = uploadApis.uploadImage(image);
 
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<SourceData>() {
             @Override
-            public void onResponse(Call<ResponseBody> call,
-                                   @NonNull Response<ResponseBody> response) {
-                ResponseBody ResponseBody = response.body();
-                Log.v("Respose code:",""+response.code());
-                Log.v("Upload", "success" + call + " " + ResponseBody);
-                // System.out.println(ResponseBody.getImage() + "SSSSSSSSSSSSSAAAAAAAAAA");
+            public void onResponse(Call<SourceData> call,
+                                   @NonNull Response<SourceData> response) {
+
+                SourceData SourceData = response.body();
+                Log.v("Response code:", "" + response.body());
+                System.out.println("_________________________________________-----");
+                assert SourceData != null;
+                System.out.println(SourceData.getSourcefile().get_id() + "\n " + SourceData.getSourcefile().getSource_link()
+                        + " \n" + SourceData.getSourcefile().getCategory() + "\n "
+                        + SourceData.getSourcefile().getName() + " \n"
+                        + SourceData.getSourcefile().getDate()
+                );
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<SourceData> call, Throwable t) {
                 Log.e("Upload error:", t.getMessage());
             }
         });
@@ -185,7 +184,7 @@ public class FileUploadActivity extends AppCompatActivity {
     }
 
     public boolean CheckPermission() {
-        System.out.println("00000000000000000000000000000000");
+
         if (ContextCompat.checkSelfPermission(FileUploadActivity.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(FileUploadActivity.this,
@@ -194,12 +193,11 @@ public class FileUploadActivity extends AppCompatActivity {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            System.out.println("1111111111111111111111111111111111111111");
+
             if (ActivityCompat.shouldShowRequestPermissionRationale(FileUploadActivity.this,
                     Manifest.permission.READ_EXTERNAL_STORAGE) || ActivityCompat.shouldShowRequestPermissionRationale(FileUploadActivity.this,
                     Manifest.permission.CAMERA) || ActivityCompat.shouldShowRequestPermissionRationale(FileUploadActivity.this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                System.out.println("2222222222222222222222222222222222222222");
                 new AlertDialog.Builder(FileUploadActivity.this)
                         .setTitle("Permission")
                         .setMessage("Please accept the permissions")
@@ -207,12 +205,10 @@ public class FileUploadActivity extends AppCompatActivity {
 
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                System.out.println("3333333333333333333333333333333333333333333333");
                                 //Prompt the user once explanation has been shown
                                 ActivityCompat.requestPermissions(FileUploadActivity.this,
                                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                         MY_PERMISSIONS_REQUEST_LOCATION);
-                                System.out.println("444444444444444444444444444444444444444444444");
 
                                 startActivity(new Intent(FileUploadActivity
                                         .this, FileUploadActivity.class));
@@ -223,15 +219,12 @@ public class FileUploadActivity extends AppCompatActivity {
                         .show();
 
             } else {
-                System.out.println("555555555555555555555555555555555555555555555");
                 ActivityCompat.requestPermissions(FileUploadActivity.this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }
-            System.out.println("6666666666666666666666666666666666666666666");
             return true;
         } else {
-            System.out.println("77777777777777777777777777777777777777777777");
             return true;
 
         }
