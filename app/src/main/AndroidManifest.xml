@@ -72,6 +72,10 @@
             android:name=".UserProfileActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ResponseActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
