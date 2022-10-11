@@ -13,9 +13,9 @@ import retrofit2.http.Part;
 
 public interface UploadApis {
     @Multipart
-    @Headers({
-            "Content-Type: application/json"
-    })
+//    @Headers({
+//            "Content-Type: application/json"
+//    })
     @POST("upload")
     Call<ResponseBody> uploadImage(@Part MultipartBody.Part image);
 }

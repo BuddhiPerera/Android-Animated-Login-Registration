@@ -1,14 +1,11 @@
 package com.example.sample;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,9 +24,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.android.volley.toolbox.JsonObjectRequest;
-//import com.cwise.uploadimageretrofit.databinding.ActivityMainBinding;
-import com.example.sample.model.Post;
-import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -47,7 +40,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class FileUploadActivity extends AppCompatActivity {
@@ -56,10 +48,11 @@ public class FileUploadActivity extends AppCompatActivity {
     ImageView imageView;
     Button camera, gallery;
     OkHttpClient client = new OkHttpClient();
+    //    private ProgressDialog progressDialog;
+    String path;
     private JSONObject jsonObject;
     private JsonObjectRequest jsonObjectRequest;
-//    private ProgressDialog progressDialog;
-    String path;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +98,7 @@ public class FileUploadActivity extends AppCompatActivity {
         switch (requestCode) {
 
             case 0: {
-                System.out.println(resultCode +"SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSss");
+                System.out.println(resultCode + "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSss");
                 if (resultCode == RESULT_OK) {
                     Bundle extras = data.getExtras();
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
@@ -139,7 +132,7 @@ public class FileUploadActivity extends AppCompatActivity {
                         Uri uri = data.getData();
                         Context context = FileUploadActivity.this;
                         path = RealPathUtil.getRealPath(context, uri);
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),  uri);
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                         imageView.setImageBitmap(bitmap);
 //                        progressDialog.show();
                         UploadImage(path);
@@ -155,7 +148,7 @@ public class FileUploadActivity extends AppCompatActivity {
 
     }
 
-    private void UploadImage( String imageUri) throws IOException {
+    private void UploadImage(String imageUri) throws IOException {
         File file = new File(imageUri);
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part image = MultipartBody.Part.createFormData("/*", file.getName(), requestFile);
@@ -169,8 +162,8 @@ public class FileUploadActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call,
                                    @NonNull Response<ResponseBody> response) {
                 ResponseBody ResponseBody = response.body();
-                Log.v("Upload", "success" + call +" " +ResponseBody);
-               // System.out.println(ResponseBody.getImage() + "SSSSSSSSSSSSSAAAAAAAAAA");
+                Log.v("Upload", "success" + call + " " + ResponseBody);
+                // System.out.println(ResponseBody.getImage() + "SSSSSSSSSSSSSAAAAAAAAAA");
             }
 
             @Override
@@ -239,7 +232,7 @@ public class FileUploadActivity extends AppCompatActivity {
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }
             System.out.println("6666666666666666666666666666666666666666666");
-            return false;
+            return true;
         } else {
             System.out.println("77777777777777777777777777777777777777777777");
             return true;
