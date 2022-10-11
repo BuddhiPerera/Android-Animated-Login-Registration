@@ -37,7 +37,7 @@
         app:layout_constraintVertical_bias="0.781"
         tools:ignore="MissingConstraints" />
 
-    <com.apachat.loadingbutton.core.customViews.CircularProgressButton
+    <Button
         android:id="@+id/btn_camera"
         style="@style/loginButton"
         android:layout_width="150dp"
@@ -53,7 +53,7 @@
         app:layout_constraintVertical_bias="0.901"
         tools:ignore="UsingOnClickInXml" />
 
-    <com.apachat.loadingbutton.core.customViews.CircularProgressButton
+    <Button
         android:id="@+id/btn_gallery"
         style="@style/loginButton"
         android:layout_width="150dp"
@@ -68,11 +68,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.901"
         tools:ignore="UsingOnClickInXml" />
-    <ProgressBar
-        android:id="@+id/idLoadingPB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        tools:ignore="MissingConstraints" />
+<!--    <ProgressBar-->
+<!--        android:id="@+id/idLoadingPB"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:visibility="gone"-->
+<!--        tools:ignore="MissingConstraints" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
