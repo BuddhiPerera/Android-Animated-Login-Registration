@@ -1,7 +1,6 @@
 package com.example.sample;
 
 import com.example.sample.model.SourceData;
-import com.example.sample.model.SourceFile;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;

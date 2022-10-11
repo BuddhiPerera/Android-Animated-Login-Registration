@@ -49,7 +49,6 @@ public class FileUploadActivity extends AppCompatActivity {
     String path;
     ProgressDialog progressDialog;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
