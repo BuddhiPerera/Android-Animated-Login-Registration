@@ -1,12 +1,10 @@
 package com.example.sample;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MenuItem;
@@ -18,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -58,7 +55,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             @Override
             public void onClick(View v) {
 //                switchToCamera();
-               switchToCamera2();
+                switchToCamera2();
 
             }
         });
@@ -128,7 +125,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         values.put(MediaStore.Images.Media.TITLE, "New Picture ");
         values.put(MediaStore.Images.Media.DESCRIPTION, "From The Camera ");
         image_uri = getContentResolver().insert(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
@@ -151,7 +148,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESULT_OK){
+        if (requestCode == RESULT_OK) {
 //            mIma.setImageURI(image_uri);
         }
     }

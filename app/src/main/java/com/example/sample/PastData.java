@@ -1,10 +1,7 @@
 package com.example.sample;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,17 +23,13 @@ public class PastData extends AppCompatActivity {
     ArrayList<PastDataModel> list;
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
-    private ListView listViewMessage;
-    private TextView textView;
-    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_past_data);
-        System.out.println("RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
         recyclerView = findViewById(R.id.userList);
-        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+        databaseReference = FirebaseDatabase.getInstance().getReference("stonelia");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -52,16 +45,12 @@ public class PastData extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     PastDataModel pastDataModel = dataSnapshot.getValue(PastDataModel.class);
                     list.add(pastDataModel);
-                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa");
-
                 }
-                System.out.println("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
                 myAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASSSSSSSSS");
             }
         });
     }

@@ -35,7 +35,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         PastDataModel pastDataModel = list.get(position);
         holder.name.setText(pastDataModel.getName());
-        holder.type.setText(pastDataModel.getType());
+        holder.type.setText(pastDataModel.getCategory());
     }
 
     @Override

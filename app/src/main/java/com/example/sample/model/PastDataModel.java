@@ -2,15 +2,15 @@ package com.example.sample.model;
 
 public class PastDataModel {
 
-    String name, type;
-
-    public PastDataModel(String name, String type) {
+    String name, category;
+    public PastDataModel(String name, String category) {
         this.name = name;
-        this.type = type;
+        this.category = category;
     }
 
     public PastDataModel() {
     }
+
 
     public String getName() {
         return name;
@@ -20,11 +20,12 @@ public class PastDataModel {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public String getCategory() {
+        return category;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setCategory(String category) {
+        this.category = category;
     }
+
 }
