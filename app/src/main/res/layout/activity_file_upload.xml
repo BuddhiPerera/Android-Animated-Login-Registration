@@ -23,16 +23,19 @@
     <TextView
         android:id="@+id/tvSwitchToLogin"
         style="@style/parent"
+        android:layout_alignParentLeft="true"
         android:text="Upload your files to analyze"
         android:textAlignment="center"
         android:textColor="@color/themeColor"
         android:textSize="17sp"
         android:textStyle="bold"
+        android:paddingLeft="85dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.783"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.781"
+        tools:ignore="MissingConstraints" />
 
     <com.apachat.loadingbutton.core.customViews.CircularProgressButton
         android:id="@+id/btn_camera"

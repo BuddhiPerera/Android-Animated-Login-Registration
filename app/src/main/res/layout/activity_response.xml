@@ -20,6 +20,7 @@
         android:layout_marginTop="144dp"
         android:layout_marginBottom="564dp"
         android:text="Here's your findings..."
+        android:paddingLeft="25dp"
         android:textAlignment="center"
         android:textColor="@color/themeColor"
         android:textSize="17sp"
