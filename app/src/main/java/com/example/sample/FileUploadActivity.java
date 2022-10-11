@@ -173,7 +173,7 @@ public class FileUploadActivity extends AppCompatActivity {
                                    @NonNull Response<SourceData> response) {
 
                 SourceData SourceData = response.body();
-                Log.v("Response code:", "" + response.body());
+                Log.v("Response code:", "" + response.code());
                 System.out.println("_________________________________________________________");
                 assert SourceData != null;
                 progressDialog.cancel();
