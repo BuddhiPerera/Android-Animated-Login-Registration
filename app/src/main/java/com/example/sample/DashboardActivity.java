@@ -1,6 +1,7 @@
 package com.example.sample;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -57,7 +58,22 @@ public class DashboardActivity extends AppCompatActivity {
                 switchToMap();
             }
         });
+
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) RelativeLayout history = (RelativeLayout) findViewById(R.id.history);
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToHistory();
+            }
+        });
     }
+
+    private void switchToHistory() {
+        Intent intent = new Intent(this, PastData.class);
+        startActivity(intent);
+        finish();
+    }
+
 
     private void switchToCamera2() {
         Intent intent = new Intent(this, FileUploadActivity.class);
@@ -76,21 +92,6 @@ public class DashboardActivity extends AppCompatActivity {
         finish();
     }
 
-    private void switchToCamera() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.CAMERA) ==
-                    PackageManager.PERMISSION_DENIED ||
-                checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
-                            PackageManager.PERMISSION_DENIED) {
-                String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                requestPermissions(permission, PERMISSION_CODE);
-            } else {
-               openCamera();
-            }
-        } else {
-
-        }
-    }
 
     private void openCamera() {
         ContentValues values = new ContentValues();
