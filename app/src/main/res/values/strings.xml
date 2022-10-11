@@ -17,4 +17,7 @@
     <string name="uploadcare_public_key" translatable="false">6c37d1cf7ea0f23ed7c0</string>
     <string name="uploadcare_private_key" translatable="false">9b74c7ae22a49f7f59c7</string>
     <string name="todo">TODO</string>
+    
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

@@ -22,10 +22,10 @@
             android:title="Map" />
     </group>
 
-    <group android:checkableBehavior="single">
 
-        <item android:title="Profile">
-            <menu>
+    <item android:title="Profile">
+        <menu>
+            <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_login"
                     android:icon="@drawable/ic_baseline_login_24"
@@ -40,11 +40,10 @@
                     android:id="@+id/nav_logout"
                     android:icon="@drawable/ic_logout"
                     android:title="Logout" />
-            </menu>
+            </group>
+        </menu>
 
-        </item>
-
-    </group>
+    </item>
 
     <item android:title="Communicate">
 
