@@ -16,11 +16,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="144dp"
-        android:layout_marginBottom="564dp"
-        android:text="Here's your findings..."
+        android:layout_marginLeft="-3dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="653dp"
         android:paddingLeft="25dp"
+        android:text="Here's your findings..."
         android:textAlignment="center"
         android:textColor="@color/themeColor"
         android:textSize="17sp"
@@ -31,15 +31,25 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp" />
 
+    <ImageView
+        android:layout_width="375dp"
+        android:id="@+id/responseImage"
+        android:layout_height="239dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="120dp"
+        android:layout_marginRight="20dp"
+         />
+
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:layout_width="390dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="219dp"
+        android:layout_marginTop="366dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="152dp"
+        android:layout_marginBottom="108dp"
         app:cardBackgroundColor="@color/themeColor"
         app:cardCornerRadius="10dp">
 
@@ -55,8 +65,8 @@
 
             <TextView
                 android:id="@+id/text_response"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_width="312dp"
+                android:layout_height="263dp"
                 android:text="hello"
                 android:textColor="@color/black">
 
@@ -74,10 +84,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="119dp"
-        android:layout_marginTop="611dp"
-        android:layout_marginEnd="142dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="637dp"
+        android:layout_marginEnd="137dp"
+        android:layout_marginBottom="46dp"
         android:backgroundTint="@color/themeColor"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
