@@ -113,8 +113,6 @@ public class FileUploadActivity extends AppCompatActivity {
                         path = RealPathUtil.getRealPath(context, imageUri);
                         System.out.println(imageUri+"RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRrr");
                         UploadImage(path);
-
-
                         Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                         imageView.setImageBitmap(bitmap);
 ////                        progressDialog.show();
@@ -144,8 +142,6 @@ public class FileUploadActivity extends AppCompatActivity {
             }
             break;
         }
-
-
     }
 
     private void UploadImage(String imageUri) throws IOException {
@@ -162,6 +158,7 @@ public class FileUploadActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call,
                                    @NonNull Response<ResponseBody> response) {
                 ResponseBody ResponseBody = response.body();
+                Log.v("Respose code:",""+response.code());
                 Log.v("Upload", "success" + call + " " + ResponseBody);
                 // System.out.println(ResponseBody.getImage() + "SSSSSSSSSSSSSAAAAAAAAAA");
             }
