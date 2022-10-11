@@ -1,83 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ResponseActivity">
+    tools:context=".ResponseActivity"
+    android:layout_gravity="center"
+    android:background="@color/white"
+    android:focusableInTouchMode="true"
+    android:gravity="center">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+    <TextView
+        android:id="@+id/tvSwitchToLogin"
+        style="@style/parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="-3dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="653dp"
+        android:paddingLeft="25dp"
+        android:text="Here's your findings..."
+        android:textAlignment="center"
+        android:textColor="@color/themeColor"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.783"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
 
+    <ImageView
+        android:id="@+id/responseImage"
+        android:layout_width="375dp"
+        android:layout_height="239dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="120dp"
+        android:layout_marginRight="20dp" />
 
-        <TextView
-            android:id="@+id/tvSwitchToLogin"
-            style="@style/parent"
+    <androidx.cardview.widget.CardView
+        android:layout_width="373dp"
+        android:layout_height="198dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="391dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="142dp"
+        app:cardBackgroundColor="@color/themeColor"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="-8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="621dp"
-            android:fontFamily="sans-serif"
-            android:paddingLeft="22dp"
-            android:text="Here's your findings..."
-            android:textColor="@color/themeColor"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.783"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="0dp" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <ImageView
-            android:id="@+id/responseImage"
-            android:layout_width="375dp"
-            android:layout_height="239dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="120dp"
-            android:layout_marginRight="20dp" />
+            <TextView
+                android:id="@+id/text_response"
+                android:layout_width="312dp"
+                android:layout_height="150dp"
+                android:text="hello"
+                android:textColor="@color/black">
 
-        <!-- CARD VIEW START -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="376dp"
-            android:layout_height="241dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="373dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="117dp"
-            app:cardBackgroundColor="@color/themeColor"
-            app:cardCornerRadius="10dp">
+            </TextView>
+        </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <TextView
-                    android:id="@+id/text_response"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:textColor="@color/black"></TextView>
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-        <!-- CARD VIEW END -->
-
+    </androidx.cardview.widget.CardView>
 
     <com.apachat.loadingbutton.core.customViews.CircularProgressButton
         android:id="@+id/btn_save_result"
@@ -85,13 +80,11 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="637dp"
-        android:layout_marginEnd="137dp"
-        android:layout_marginBottom="46dp"
+        android:layout_marginStart="115dp"
+        android:layout_marginEnd="115dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="@color/themeColor"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -102,6 +95,4 @@
         app:layout_constraintVertical_bias="0.901"
         tools:ignore="UsingOnClickInXml" />
 
-    </RelativeLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
