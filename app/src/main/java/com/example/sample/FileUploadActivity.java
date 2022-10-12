@@ -13,19 +13,26 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.sample.model.SourceData;
+import com.google.android.material.navigation.NavigationView;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,22 +48,25 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-public class FileUploadActivity extends AppCompatActivity {
+public class FileUploadActivity extends AppCompatActivity{
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     ImageView imageView;
-    Button camera, gallery;
+    Button camera, gallery, home;
     String path;
     ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_file_upload);
 
         camera = findViewById(R.id.btn_camera);
         gallery = findViewById(R.id.btn_gallery);
         imageView = findViewById(R.id.imageViews);
+        home = findViewById(R.id.btn_home);
         progressDialog = new ProgressDialog(FileUploadActivity.this);
         progressDialog.setMessage("Image Uploading...");
 
@@ -80,6 +90,14 @@ public class FileUploadActivity extends AppCompatActivity {
                     Intent select = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(select, 1);
                 }
+            }
+        });
+
+        home.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent home = new Intent(FileUploadActivity.this, DashboardActivity.class);
+                startActivity(home);
             }
         });
     }

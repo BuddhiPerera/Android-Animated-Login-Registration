@@ -289,7 +289,7 @@
                         android:layout_below="@id/airplane"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="10dp"
-                        android:text="Option 2"
+                        android:text="Share"
                         android:textSize="24sp"
                         app:fontFamily="sans-serif" />
 
@@ -299,7 +299,7 @@
                         android:layout_height="75dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/ic__340039_tourist_car_icon" />
+                        app:srcCompat="@drawable/ic__219597_music_trumpet_musician_profession_entertainment_icon" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>

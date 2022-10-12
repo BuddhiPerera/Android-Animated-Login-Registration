@@ -164,6 +164,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
+    // navigation drawer
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem){
         switch(menuItem.getItemId()){
