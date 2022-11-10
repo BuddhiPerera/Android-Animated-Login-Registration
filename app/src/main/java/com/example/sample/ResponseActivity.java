@@ -38,19 +38,23 @@ public class ResponseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_response);
         Intent i = getIntent();
-        String name = i.getStringExtra("name");
-        String source_link = i.getStringExtra("source_link");
-        String category = i.getStringExtra("category");
-        String _id = i.getStringExtra("_id");
-        String date = i.getStringExtra("date");
+
+
+
+        String artifact = i.getStringExtra("isArtifact");
+        String mineralType = i.getStringExtra("mineralType");
+        String roughRelativeRating = i.getStringExtra("roughRelativeRating");
+        String makingTechnique = i.getStringExtra("makingTechnique");
+        String functionalDescription = i.getStringExtra("functionalDescription");
+        String sourceLink = i.getStringExtra("sourceLink");
 
         SourceFile sourceFile = new SourceFile();
 
-        sourceFile.set_id(_id);
-        sourceFile.setDate(date);
-        sourceFile.setCategory(category);
-        sourceFile.setSource_link(source_link);
-        sourceFile.setName(name);
+        sourceFile.setIsArtifact(artifact);
+        sourceFile.setMineralType(mineralType);
+        sourceFile.setRoughRelativeDating(roughRelativeRating);
+        sourceFile.setMakingTechnique(makingTechnique);
+        sourceFile.setFunctionalDescription(functionalDescription);
 
 
         mStorageRef = FirebaseStorage.getInstance().getReference("stonelia");
@@ -61,17 +65,15 @@ public class ResponseActivity extends AppCompatActivity {
 
         btn_save_result = findViewById(R.id.btn_save_result);
         responseImage = findViewById(R.id.responseImage);
-        String data = "Name :" + name
-                + "\nCategory :" + category
-                + "\nId :" + _id
-                + "\nDate" + date;
+        String data = "Is Artifact :" +  artifact
+                + "\nMineral Type :" + mineralType
+                + "\nRough Relative Dating :" + roughRelativeRating
+                + "\nMaking Technique" + makingTechnique
+                + "\nMDescription" + functionalDescription;
         mAuth = FirebaseAuth.getInstance();
 
-        new DownloadImageTask(responseImage).execute(source_link);
-
-
+        new DownloadImageTask(responseImage).execute(sourceLink);
         text_response.setText(data);
-
 
         btn_save_result.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,11 +85,11 @@ public class ResponseActivity extends AppCompatActivity {
     }
 
     private void saveInFireBase(SourceFile sourceFile) {
-        String name = sourceFile.getName();
-        String source_link = sourceFile.getSource_link();
-        String category = sourceFile.getCategory();
-        String _id = sourceFile.get_id();
-        String date = sourceFile.getDate();
+        String name = sourceFile.getFunctionalDescription();
+        String source_link = sourceFile.getIsArtifact();
+        String category = sourceFile.getFunctionalDescription();
+        String _id = sourceFile.getRoughRelativeDating();
+
 
         if (name.isEmpty() || source_link.isEmpty() || category.isEmpty() || _id.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_LONG).show();
@@ -98,8 +100,6 @@ public class ResponseActivity extends AppCompatActivity {
 
         // after adding this data we are showing toast message.
         Toast.makeText(ResponseActivity.this, "data added", Toast.LENGTH_SHORT).show();
-
-
     }
 
 

@@ -31,6 +31,7 @@ import androidx.core.content.FileProvider;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.sample.model.Results;
 import com.example.sample.model.SourceData;
 import com.google.android.material.navigation.NavigationView;
 
@@ -183,40 +184,51 @@ public class FileUploadActivity extends AppCompatActivity{
 
         Retrofit retrofit = NetworkClient.getRetrofit();
         UploadApis uploadApis = retrofit.create(UploadApis.class);
-        Call<SourceData> call = uploadApis.uploadImage(image);
-
-        call.enqueue(new Callback<SourceData>() {
+        Call<Results> call = uploadApis.uploadImage(image);
+        Log.v("Response code:", "sssssssss" +call );
+        call.enqueue(new Callback<Results>() {
             @Override
-            public void onResponse(Call<SourceData> call,
-                                   @NonNull Response<SourceData> response) {
+            public void onResponse(Call<Results> call,
+                                   @NonNull Response<Results> response) {
 
-                SourceData SourceData = response.body();
-                Log.v("Response code:", "" + response.code());
+                Results Results = response.body();
+                Log.v("Responsez code:", Results +" " + response.code());
                 System.out.println("_________________________________________________________");
-                assert SourceData != null;
+//                assert Results != null;
                 progressDialog.cancel();
-                System.out.println(SourceData.getSourcefile().get_id() + "\n " + SourceData.getSourcefile().getSource_link()
-                        + " \n" + SourceData.getSourcefile().getCategory() + "\n "
-                        + SourceData.getSourcefile().getName() + " \n"
-                        + SourceData.getSourcefile().getDate());
-                switchToProfile(SourceData);
+//                System.out.println(Results.getResults().getStone_details().getFunctionalDescription() + "\n " + Results.getResults().getStone_details().getIsArtifact()
+//                        + " \n" + Results.getResults().getStone_details().getRoughRelativeDating() + "\n "
+//                        + " \n"
+//                        + Results.getResults().getStone_details().getRoughRelativeDating());
+
+//                SourceData.setSource_link("https://ucarecdn.com/cb9d35f5-1319-4c87-8cca-06750382b26f/1665545189066IMG_20220508_133259.jpg");
+//                SourceData.getStone_details().setFunctionalDescription("\"This stone tool is a Blade. This tool was used to stripping flesh from hunted animals or to shape other tools such as woods and bones.\"");
+//                SourceData.getStone_details().setMineralType("Quartz");
+//                SourceData.getStone_details().setIsArtifact("true");
+//                SourceData.getStone_details().setMakingTechnique("Blade Technique");
+//                SourceData.getStone_details().setRoughRelativeDating("Mesolithic");
+
+                switchToProfile(Results);
             }
 
             @Override
-            public void onFailure(Call<SourceData> call, Throwable t) {
+            public void onFailure(Call<Results> call, Throwable t) {
                 progressDialog.cancel();
-                Log.e("Upload error:", t.getMessage());
+                Log.e("Uploads error:", t.getMessage());
             }
         });
     }
 
-    private void switchToProfile(SourceData sourceData) {
+    private void switchToProfile(Results sourceData) {
         Intent intent = new Intent(this, ResponseActivity.class);
-        intent.putExtra("name",sourceData.getSourcefile().getName());
-        intent.putExtra("source_link",sourceData.getSourcefile().getSource_link());
-        intent.putExtra("category",sourceData.getSourcefile().getCategory());
-        intent.putExtra("_id",sourceData.getSourcefile().get_id());
-        intent.putExtra("date",sourceData.getSourcefile().getDate());
+        intent.putExtra("isArtifact",sourceData.getStone_details().isArtifact());
+        intent.putExtra("mineralType",sourceData.getStone_details().getMineralType());
+        intent.putExtra("roughRelativeRating",sourceData.getStone_details().getRoughRelativeDating());
+
+        intent.putExtra("functionalDescription",sourceData.getStone_details().getFunctionalDescription());
+        intent.putExtra("makingTechnique",sourceData.getStone_details().getMakingTechnique());
+        intent.putExtra("sourceLink",sourceData.getSource_link());
+
         startActivity(intent);
         finish();
     }
