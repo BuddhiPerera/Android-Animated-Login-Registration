@@ -92,6 +92,7 @@ public class ResponseActivity extends AppCompatActivity {
 
     }
 
+
     private void saveInFireBase(SourceFile sourceFile) {
         String name = sourceFile.getFunctionalDescription();
         boolean source_link = sourceFile.isArtifact();
