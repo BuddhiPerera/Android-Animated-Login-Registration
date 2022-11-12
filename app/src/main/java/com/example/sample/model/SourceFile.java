@@ -4,7 +4,7 @@ package com.example.sample.model;
 public class SourceFile {
 
 
-    String isArtifact;
+    boolean isArtifact;
 String mineralType;
 String roughRelativeDating;
 String makingTechnique;
@@ -13,19 +13,18 @@ String functionalDescription;
     public SourceFile() {
     }
 
-    public SourceFile(String isArtifact, String mineralType, String roughRelative, String makingTechnique, String functionalDescription) {
+    public SourceFile(boolean isArtifact, String mineralType, String roughRelativeDating, String makingTechnique, String functionalDescription) {
         this.isArtifact = isArtifact;
         this.mineralType = mineralType;
-        this.roughRelativeDating = roughRelative;
+        this.roughRelativeDating = roughRelativeDating;
         this.makingTechnique = makingTechnique;
-
         this.functionalDescription = functionalDescription;
     }
 
     @Override
     public String toString() {
         return "SourceFile{" +
-                "isArtifact='" + isArtifact + '\'' +
+                "isArtifact=" + isArtifact +
                 ", mineralType='" + mineralType + '\'' +
                 ", roughRelativeDating='" + roughRelativeDating + '\'' +
                 ", makingTechnique='" + makingTechnique + '\'' +
@@ -33,12 +32,12 @@ String functionalDescription;
                 '}';
     }
 
-    public String getIsArtifact() {
+    public boolean isArtifact() {
         return isArtifact;
     }
 
-    public void setIsArtifact(String isArtifact) {
-        this.isArtifact = isArtifact;
+    public void setArtifact(boolean artifact) {
+        isArtifact = artifact;
     }
 
     public String getMineralType() {
@@ -64,7 +63,6 @@ String functionalDescription;
     public void setMakingTechnique(String makingTechnique) {
         this.makingTechnique = makingTechnique;
     }
-
 
     public String getFunctionalDescription() {
         return functionalDescription;

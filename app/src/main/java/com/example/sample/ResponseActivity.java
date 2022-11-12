@@ -30,8 +30,6 @@ public class ResponseActivity extends AppCompatActivity {
     // creating a variable for our Database
     // Reference for Firebase.
     DatabaseReference databaseReference;
-    private FirebaseAuth mAuth;
-    private StorageReference mStorageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,25 +37,23 @@ public class ResponseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_response);
         Intent i = getIntent();
 
-
-
-        String artifact = i.getStringExtra("isArtifact");
+        boolean artifact = true;
         String mineralType = i.getStringExtra("mineralType");
-        String roughRelativeRating = i.getStringExtra("roughRelativeRating");
-        String makingTechnique = i.getStringExtra("makingTechnique");
+        String roughRelativeRating = i.getStringExtra("roughRelativeDating");
         String functionalDescription = i.getStringExtra("functionalDescription");
+        String makingTechnique = i.getStringExtra("makingTechnique");
         String sourceLink = i.getStringExtra("sourceLink");
 
         SourceFile sourceFile = new SourceFile();
 
-        sourceFile.setIsArtifact(artifact);
+        sourceFile.setArtifact(artifact);
         sourceFile.setMineralType(mineralType);
         sourceFile.setRoughRelativeDating(roughRelativeRating);
         sourceFile.setMakingTechnique(makingTechnique);
         sourceFile.setFunctionalDescription(functionalDescription);
 
 
-        mStorageRef = FirebaseStorage.getInstance().getReference("stonelia");
+        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference("stonelia");
         databaseReference = FirebaseDatabase.getInstance().getReference("stonelia");
 
 
@@ -70,7 +66,7 @@ public class ResponseActivity extends AppCompatActivity {
                 + "\nRough Relative Dating :" + roughRelativeRating
                 + "\nMaking Technique" + makingTechnique
                 + "\nMDescription" + functionalDescription;
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         new DownloadImageTask(responseImage).execute(sourceLink);
         text_response.setText(data);
@@ -86,12 +82,12 @@ public class ResponseActivity extends AppCompatActivity {
 
     private void saveInFireBase(SourceFile sourceFile) {
         String name = sourceFile.getFunctionalDescription();
-        String source_link = sourceFile.getIsArtifact();
+        boolean source_link = sourceFile.isArtifact();
         String category = sourceFile.getFunctionalDescription();
         String _id = sourceFile.getRoughRelativeDating();
 
 
-        if (name.isEmpty() || source_link.isEmpty() || category.isEmpty() || _id.isEmpty()) {
+        if (name.isEmpty() || source_link || category.isEmpty() || _id.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_LONG).show();
             return;
         }

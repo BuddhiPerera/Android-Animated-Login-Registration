@@ -170,13 +170,11 @@ public class FileUploadActivity extends AppCompatActivity{
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                 }
             }
             break;
         }
     }
-
     private void UploadImage(String imageUri) throws IOException {
         File file = new File(imageUri);
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
@@ -188,31 +186,19 @@ public class FileUploadActivity extends AppCompatActivity{
         Log.v("Response code:", "sssssssss" +call );
         call.enqueue(new Callback<Results>() {
             @Override
-            public void onResponse(Call<Results> call,
+            public void onResponse(@NonNull Call<Results> call,
                                    @NonNull Response<Results> response) {
-
-                Results Results = response.body();
-                Log.v("Responsez code:", Results +" " + response.code());
+                Results results = response.body();
+                Log.v(results +"Responsez code:",  response.body()+" " + response.code());
                 System.out.println("_________________________________________________________");
-//                assert Results != null;
                 progressDialog.cancel();
-//                System.out.println(Results.getResults().getStone_details().getFunctionalDescription() + "\n " + Results.getResults().getStone_details().getIsArtifact()
-//                        + " \n" + Results.getResults().getStone_details().getRoughRelativeDating() + "\n "
-//                        + " \n"
-//                        + Results.getResults().getStone_details().getRoughRelativeDating());
-
-//                SourceData.setSource_link("https://ucarecdn.com/cb9d35f5-1319-4c87-8cca-06750382b26f/1665545189066IMG_20220508_133259.jpg");
-//                SourceData.getStone_details().setFunctionalDescription("\"This stone tool is a Blade. This tool was used to stripping flesh from hunted animals or to shape other tools such as woods and bones.\"");
-//                SourceData.getStone_details().setMineralType("Quartz");
-//                SourceData.getStone_details().setIsArtifact("true");
-//                SourceData.getStone_details().setMakingTechnique("Blade Technique");
-//                SourceData.getStone_details().setRoughRelativeDating("Mesolithic");
-
-                switchToProfile(Results);
+                assert results != null;
+                if (results.getStonedetails().isIsartifact()) {
+                    switchToProfile(results);
+                }
             }
-
             @Override
-            public void onFailure(Call<Results> call, Throwable t) {
+            public void onFailure(@NonNull Call<Results> call, @NonNull Throwable t) {
                 progressDialog.cancel();
                 Log.e("Uploads error:", t.getMessage());
             }
@@ -221,13 +207,12 @@ public class FileUploadActivity extends AppCompatActivity{
 
     private void switchToProfile(Results sourceData) {
         Intent intent = new Intent(this, ResponseActivity.class);
-        intent.putExtra("isArtifact",sourceData.getStone_details().isArtifact());
-        intent.putExtra("mineralType",sourceData.getStone_details().getMineralType());
-        intent.putExtra("roughRelativeRating",sourceData.getStone_details().getRoughRelativeDating());
-
-        intent.putExtra("functionalDescription",sourceData.getStone_details().getFunctionalDescription());
-        intent.putExtra("makingTechnique",sourceData.getStone_details().getMakingTechnique());
-        intent.putExtra("sourceLink",sourceData.getSource_link());
+//        intent.putExtra("isArtifact",sourceData.getStonedetails().isIsartifact());
+        intent.putExtra("mineralType",sourceData.getStonedetails().getMineraltype());
+        intent.putExtra("roughRelativeDating",sourceData.getStonedetails().getRoughrelativedating());
+        intent.putExtra("functionalDescription",sourceData.getStonedetails().getFunctionaldescription());
+        intent.putExtra("makingTechnique",sourceData.getStonedetails().getMakingtechnique());
+        intent.putExtra("sourceLink",sourceData.getStonedetails().getSourcelink());
 
         startActivity(intent);
         finish();

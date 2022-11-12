@@ -3,71 +3,71 @@ package com.example.sample.model;
 import java.util.ArrayList;
 
 public class SourceData {
-     boolean isArtifact;
-     String mineralType;
-     String makingTechnique;
-     String roughRelativeDating;
-     String functionalDescription;
+
+    String sourcelink;
+    boolean isartifact;
+    String mineraltype;
+    String makingtechnique;
+    String roughrelativedating;
+    String functionaldescription;
 
     public SourceData() {
     }
 
-    @Override
-    public String toString() {
-        return "SourceData{" +
-                "isArtifact=" + isArtifact +
-                ", mineralType='" + mineralType + '\'' +
-                ", makingTechnique='" + makingTechnique + '\'' +
-                ", roughRelativeDating='" + roughRelativeDating + '\'' +
-                ", functionalDescription='" + functionalDescription + '\'' +
-                '}';
+    public SourceData(String sourcelink, boolean isartifact, String mineraltype, String makingtechnique, String roughrelativedating, String functionaldescription) {
+        this.sourcelink = sourcelink;
+        this.isartifact = isartifact;
+        this.mineraltype = mineraltype;
+        this.makingtechnique = makingtechnique;
+        this.roughrelativedating = roughrelativedating;
+        this.functionaldescription = functionaldescription;
     }
 
-    public boolean isArtifact() {
-        return isArtifact;
+    public String getSourcelink() {
+        return sourcelink;
     }
 
-    public void setArtifact(boolean artifact) {
-        isArtifact = artifact;
+    public void setSourcelink(String sourcelink) {
+        this.sourcelink = sourcelink;
     }
 
-    public String getMineralType() {
-        return mineralType;
+    public boolean isIsartifact() {
+        return isartifact;
     }
 
-    public void setMineralType(String mineralType) {
-        this.mineralType = mineralType;
+    public void setIsartifact(boolean isartifact) {
+        this.isartifact = isartifact;
     }
 
-    public String getMakingTechnique() {
-        return makingTechnique;
+    public String getMineraltype() {
+        return mineraltype;
     }
 
-    public void setMakingTechnique(String makingTechnique) {
-        this.makingTechnique = makingTechnique;
+    public void setMineraltype(String mineraltype) {
+        this.mineraltype = mineraltype;
     }
 
-    public String getRoughRelativeDating() {
-        return roughRelativeDating;
+    public String getMakingtechnique() {
+        return makingtechnique;
     }
 
-    public void setRoughRelativeDating(String roughRelativeDating) {
-        this.roughRelativeDating = roughRelativeDating;
+    public void setMakingtechnique(String makingtechnique) {
+        this.makingtechnique = makingtechnique;
     }
 
-    public String getFunctionalDescription() {
-        return functionalDescription;
+    public String getRoughrelativedating() {
+        return roughrelativedating;
     }
 
-    public void setFunctionalDescription(String functionalDescription) {
-        this.functionalDescription = functionalDescription;
+    public void setRoughrelativedating(String roughrelativedating) {
+        this.roughrelativedating = roughrelativedating;
     }
 
-    public SourceData(boolean isArtifact, String mineralType, String makingTechnique, String roughRelativeDating, String functionalDescription) {
-        this.isArtifact = isArtifact;
-        this.mineralType = mineralType;
-        this.makingTechnique = makingTechnique;
-        this.roughRelativeDating = roughRelativeDating;
-        this.functionalDescription = functionalDescription;
+    public String getFunctionaldescription() {
+        return functionaldescription;
+    }
+
+    public void setFunctionaldescription(String functionaldescription) {
+        this.functionaldescription = functionaldescription;
     }
 }
