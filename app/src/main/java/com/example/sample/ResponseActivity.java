@@ -31,30 +31,30 @@ public class ResponseActivity extends AppCompatActivity {
     // creating a variable for our Database
     // Reference for Firebase.
     DatabaseReference databaseReference;
-    private FirebaseAuth mAuth;
-    private StorageReference mStorageRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_response);
         Intent i = getIntent();
-        String name = i.getStringExtra("name");
-        String source_link = i.getStringExtra("source_link");
-        String category = i.getStringExtra("category");
-        String _id = i.getStringExtra("_id");
-        String date = i.getStringExtra("date");
+
+        boolean artifact = true;
+        String mineralType = i.getStringExtra("mineralType");
+        String roughRelativeRating = i.getStringExtra("roughRelativeDating");
+        String functionalDescription = i.getStringExtra("functionalDescription");
+        String makingTechnique = i.getStringExtra("makingTechnique");
+        String sourceLink = i.getStringExtra("sourceLink");
 
         SourceFile sourceFile = new SourceFile();
 
-        sourceFile.set_id(_id);
-        sourceFile.setDate(date);
-        sourceFile.setCategory(category);
-        sourceFile.setSource_link(source_link);
-        sourceFile.setName(name);
+        sourceFile.setArtifact(artifact);
+        sourceFile.setMineralType(mineralType);
+        sourceFile.setRoughRelativeDating(roughRelativeRating);
+        sourceFile.setMakingTechnique(makingTechnique);
+        sourceFile.setFunctionalDescription(functionalDescription);
 
 
-        mStorageRef = FirebaseStorage.getInstance().getReference("stonelia");
+        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference("stonelia");
         databaseReference = FirebaseDatabase.getInstance().getReference("stonelia");
 
 
@@ -62,17 +62,15 @@ public class ResponseActivity extends AppCompatActivity {
 
         btn_save_result = findViewById(R.id.btn_save_result);
         responseImage = findViewById(R.id.responseImage);
-        String data = "Name :" + name
-                + "\nCategory :" + category
-                + "\nId :" + _id
-                + "\nDate" + date;
-        mAuth = FirebaseAuth.getInstance();
+        String data = "Is Artifact :" +  artifact
+                + "\nMineral Type :" + mineralType
+                + "\nRough Relative Dating :" + roughRelativeRating
+                + "\nMaking Technique" + makingTechnique
+                + "\nMDescription" + functionalDescription;
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        new DownloadImageTask(responseImage).execute(source_link);
-
-
+        new DownloadImageTask(responseImage).execute(sourceLink);
         text_response.setText(data);
-
 
         btn_save_result.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,13 +93,13 @@ public class ResponseActivity extends AppCompatActivity {
     }
 
     private void saveInFireBase(SourceFile sourceFile) {
-        String name = sourceFile.getName();
-        String source_link = sourceFile.getSource_link();
-        String category = sourceFile.getCategory();
-        String _id = sourceFile.get_id();
-        String date = sourceFile.getDate();
+        String name = sourceFile.getFunctionalDescription();
+        boolean source_link = sourceFile.isArtifact();
+        String category = sourceFile.getFunctionalDescription();
+        String _id = sourceFile.getRoughRelativeDating();
 
-        if (name.isEmpty() || source_link.isEmpty() || category.isEmpty() || _id.isEmpty()) {
+
+        if (name.isEmpty() || source_link || category.isEmpty() || _id.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_LONG).show();
             return;
         }
@@ -110,8 +108,6 @@ public class ResponseActivity extends AppCompatActivity {
 
         // after adding this data we are showing toast message.
         Toast.makeText(ResponseActivity.this, "data added", Toast.LENGTH_SHORT).show();
-
-
     }
 
 

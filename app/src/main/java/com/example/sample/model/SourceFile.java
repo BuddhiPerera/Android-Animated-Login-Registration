@@ -2,71 +2,73 @@ package com.example.sample.model;
 
 
 public class SourceFile {
-    String name;
-    String source_link;
-    String category;
-    String _id;
-    String date;
+
+
+    boolean isArtifact;
+String mineralType;
+String roughRelativeDating;
+String makingTechnique;
+String functionalDescription;
 
     public SourceFile() {
     }
 
-    public SourceFile(String name, String source_link, String category, String _id, String date) {
-        this.name = name;
-        this.source_link = source_link;
-        this.category = category;
-        this._id = _id;
-        this.date = date;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSource_link() {
-        return source_link;
-    }
-
-    public void setSource_link(String source_link) {
-        this.source_link = source_link;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
+    public SourceFile(boolean isArtifact, String mineralType, String roughRelativeDating, String makingTechnique, String functionalDescription) {
+        this.isArtifact = isArtifact;
+        this.mineralType = mineralType;
+        this.roughRelativeDating = roughRelativeDating;
+        this.makingTechnique = makingTechnique;
+        this.functionalDescription = functionalDescription;
     }
 
     @Override
     public String toString() {
-        return "Sourcefile{" +
-                "name='" + name + '\'' +
-                ", source_link='" + source_link + '\'' +
-                ", category='" + category + '\'' +
-                ", _id='" + _id + '\'' +
-                ", date=" + date +
+        return "SourceFile{" +
+                "isArtifact=" + isArtifact +
+                ", mineralType='" + mineralType + '\'' +
+                ", roughRelativeDating='" + roughRelativeDating + '\'' +
+                ", makingTechnique='" + makingTechnique + '\'' +
+                ", functionalDescription='" + functionalDescription + '\'' +
                 '}';
+    }
+
+    public boolean isArtifact() {
+        return isArtifact;
+    }
+
+    public void setArtifact(boolean artifact) {
+        isArtifact = artifact;
+    }
+
+    public String getMineralType() {
+        return mineralType;
+    }
+
+    public void setMineralType(String mineralType) {
+        this.mineralType = mineralType;
+    }
+
+    public String getRoughRelativeDating() {
+        return roughRelativeDating;
+    }
+
+    public void setRoughRelativeDating(String roughRelativeDating) {
+        this.roughRelativeDating = roughRelativeDating;
+    }
+
+    public String getMakingTechnique() {
+        return makingTechnique;
+    }
+
+    public void setMakingTechnique(String makingTechnique) {
+        this.makingTechnique = makingTechnique;
+    }
+
+    public String getFunctionalDescription() {
+        return functionalDescription;
+    }
+
+    public void setFunctionalDescription(String functionalDescription) {
+        this.functionalDescription = functionalDescription;
     }
 }

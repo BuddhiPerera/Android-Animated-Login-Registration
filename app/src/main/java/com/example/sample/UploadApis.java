@@ -1,5 +1,6 @@
 package com.example.sample;
 
+import com.example.sample.model.Results;
 import com.example.sample.model.SourceData;
 
 import okhttp3.MultipartBody;
@@ -11,5 +12,5 @@ import retrofit2.http.Part;
 public interface UploadApis {
     @Multipart
     @POST("upload")
-    Call<SourceData> uploadImage(@Part MultipartBody.Part uploadFile);
+    Call<Results> uploadImage(@Part MultipartBody.Part uploadFile);
 }

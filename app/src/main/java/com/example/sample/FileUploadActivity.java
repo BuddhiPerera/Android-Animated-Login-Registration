@@ -31,6 +31,7 @@ import androidx.core.content.FileProvider;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.sample.model.Results;
 import com.example.sample.model.SourceData;
 import com.google.android.material.navigation.NavigationView;
 
@@ -169,13 +170,11 @@ public class FileUploadActivity extends AppCompatActivity{
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                 }
             }
             break;
         }
     }
-
     private void UploadImage(String imageUri) throws IOException {
         File file = new File(imageUri);
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
@@ -183,40 +182,38 @@ public class FileUploadActivity extends AppCompatActivity{
 
         Retrofit retrofit = NetworkClient.getRetrofit();
         UploadApis uploadApis = retrofit.create(UploadApis.class);
-        Call<SourceData> call = uploadApis.uploadImage(image);
-
-        call.enqueue(new Callback<SourceData>() {
+        Call<Results> call = uploadApis.uploadImage(image);
+        Log.v("Response code:", "sssssssss" +call );
+        call.enqueue(new Callback<Results>() {
             @Override
-            public void onResponse(Call<SourceData> call,
-                                   @NonNull Response<SourceData> response) {
-
-                SourceData SourceData = response.body();
-                Log.v("Response code:", "" + response.code());
+            public void onResponse(@NonNull Call<Results> call,
+                                   @NonNull Response<Results> response) {
+                Results results = response.body();
+                Log.v(results +"Responsez code:",  response.body()+" " + response.code());
                 System.out.println("_________________________________________________________");
-                assert SourceData != null;
                 progressDialog.cancel();
-                System.out.println(SourceData.getSourcefile().get_id() + "\n " + SourceData.getSourcefile().getSource_link()
-                        + " \n" + SourceData.getSourcefile().getCategory() + "\n "
-                        + SourceData.getSourcefile().getName() + " \n"
-                        + SourceData.getSourcefile().getDate());
-                switchToProfile(SourceData);
+                assert results != null;
+                if (results.getStonedetails().isIsartifact()) {
+                    switchToProfile(results);
+                }
             }
-
             @Override
-            public void onFailure(Call<SourceData> call, Throwable t) {
+            public void onFailure(@NonNull Call<Results> call, @NonNull Throwable t) {
                 progressDialog.cancel();
-                Log.e("Upload error:", t.getMessage());
+                Log.e("Uploads error:", t.getMessage());
             }
         });
     }
 
-    private void switchToProfile(SourceData sourceData) {
+    private void switchToProfile(Results sourceData) {
         Intent intent = new Intent(this, ResponseActivity.class);
-        intent.putExtra("name",sourceData.getSourcefile().getName());
-        intent.putExtra("source_link",sourceData.getSourcefile().getSource_link());
-        intent.putExtra("category",sourceData.getSourcefile().getCategory());
-        intent.putExtra("_id",sourceData.getSourcefile().get_id());
-        intent.putExtra("date",sourceData.getSourcefile().getDate());
+//        intent.putExtra("isArtifact",sourceData.getStonedetails().isIsartifact());
+        intent.putExtra("mineralType",sourceData.getStonedetails().getMineraltype());
+        intent.putExtra("roughRelativeDating",sourceData.getStonedetails().getRoughrelativedating());
+        intent.putExtra("functionalDescription",sourceData.getStonedetails().getFunctionaldescription());
+        intent.putExtra("makingTechnique",sourceData.getStonedetails().getMakingtechnique());
+        intent.putExtra("sourceLink",sourceData.getStonedetails().getSourcelink());
+
         startActivity(intent);
         finish();
     }

@@ -2,30 +2,57 @@ package com.example.sample.model;
 
 public class PastDataModel {
 
-    String name, category;
-    public PastDataModel(String name, String category) {
-        this.name = name;
-        this.category = category;
-    }
+    String mineralType, roughRelativeDating,makingTechnique,isArtifact;
 
     public PastDataModel() {
     }
 
-
-    public String getName() {
-        return name;
+    public PastDataModel(String mineralType, String roughRelativeDating, String makingTechnique, String isArtifact) {
+        this.mineralType = mineralType;
+        this.roughRelativeDating = roughRelativeDating;
+        this.makingTechnique = makingTechnique;
+        this.isArtifact = isArtifact;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String toString() {
+        return "PastDataModel{" +
+                "mineralType='" + mineralType + '\'' +
+                ", roughRelativeDating='" + roughRelativeDating + '\'' +
+                ", makingTechnique='" + makingTechnique + '\'' +
+                ", isArtifact='" + isArtifact + '\'' +
+                '}';
     }
 
-    public String getCategory() {
-        return category;
+    public String getMineralType() {
+        return mineralType;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setMineralType(String mineralType) {
+        this.mineralType = mineralType;
     }
 
+    public String getRoughRelativeDating() {
+        return roughRelativeDating;
+    }
+
+    public void setRoughRelativeDating(String roughRelativeDating) {
+        this.roughRelativeDating = roughRelativeDating;
+    }
+
+    public String getMakingTechnique() {
+        return makingTechnique;
+    }
+
+    public void setMakingTechnique(String makingTechnique) {
+        this.makingTechnique = makingTechnique;
+    }
+
+    public String getIsArtifact() {
+        return isArtifact;
+    }
+
+    public void setIsArtifact(String isArtifact) {
+        this.isArtifact = isArtifact;
+    }
 }
