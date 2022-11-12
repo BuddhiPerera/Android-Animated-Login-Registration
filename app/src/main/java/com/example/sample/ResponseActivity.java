@@ -48,6 +48,7 @@ public class ResponseActivity extends AppCompatActivity {
         SourceFile sourceFile = new SourceFile();
 
         sourceFile.setArtifact(artifact);
+        sourceFile.setLink(sourceLink);
         sourceFile.setMineralType(mineralType);
         sourceFile.setRoughRelativeDating(roughRelativeRating);
         sourceFile.setMakingTechnique(makingTechnique);
@@ -79,31 +80,12 @@ public class ResponseActivity extends AppCompatActivity {
             }
         });
 
-
-        home = findViewById(R.id.btn_home);
-
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent home = new Intent(ResponseActivity.this, DashboardActivity.class);
-                startActivity(home);
-            }
-        });
-
     }
-
 
     private void saveInFireBase(SourceFile sourceFile) {
         String name = sourceFile.getFunctionalDescription();
         boolean source_link = sourceFile.isArtifact();
-        String category = sourceFile.getFunctionalDescription();
         String _id = sourceFile.getRoughRelativeDating();
-
-
-        if (name.isEmpty() || source_link || category.isEmpty() || _id.isEmpty()) {
-            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_LONG).show();
-            return;
-        }
         String uploadId = databaseReference.push().getKey();
         databaseReference.child(uploadId).setValue(sourceFile);
 

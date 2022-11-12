@@ -9,8 +9,18 @@ String mineralType;
 String roughRelativeDating;
 String makingTechnique;
 String functionalDescription;
+String link;
 
     public SourceFile() {
+    }
+
+    public SourceFile(boolean isArtifact, String mineralType, String roughRelativeDating, String makingTechnique, String functionalDescription, String link) {
+        this.isArtifact = isArtifact;
+        this.mineralType = mineralType;
+        this.roughRelativeDating = roughRelativeDating;
+        this.makingTechnique = makingTechnique;
+        this.functionalDescription = functionalDescription;
+        this.link = link;
     }
 
     public SourceFile(boolean isArtifact, String mineralType, String roughRelativeDating, String makingTechnique, String functionalDescription) {
@@ -29,7 +39,16 @@ String functionalDescription;
                 ", roughRelativeDating='" + roughRelativeDating + '\'' +
                 ", makingTechnique='" + makingTechnique + '\'' +
                 ", functionalDescription='" + functionalDescription + '\'' +
+                ", link='" + link + '\'' +
                 '}';
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public boolean isArtifact() {
