@@ -27,6 +27,7 @@ public class ResponseActivity extends AppCompatActivity {
     TextView text_response;
     ImageView responseImage;
     Button btn_save_result;
+    Button home;
     // creating a variable for our Database
     // Reference for Firebase.
     DatabaseReference databaseReference;
@@ -77,6 +78,17 @@ public class ResponseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveInFireBase(sourceFile);
+            }
+        });
+
+
+        home = findViewById(R.id.btn_home);
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent home = new Intent(ResponseActivity.this, DashboardActivity.class);
+                startActivity(home);
             }
         });
 

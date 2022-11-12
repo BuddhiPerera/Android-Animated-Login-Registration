@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".PastData"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <com.apachat.loadingbutton.core.customViews.CircularProgressButton
+        android:id="@+id/btn_home"
+        style="@style/loginButton"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/themeColor"
+        android:background="@drawable/ic_logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.134"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042"
+        tools:ignore="UsingOnClickInXml" />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="54dp"

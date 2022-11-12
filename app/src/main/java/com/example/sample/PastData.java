@@ -1,7 +1,10 @@
 package com.example.sample;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +26,8 @@ public class PastData extends AppCompatActivity {
     ArrayList<PastDataModel> list;
     RecyclerView recyclerView;
     DatabaseReference databaseReference;
+    Button home;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +56,17 @@ public class PastData extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
+        home = findViewById(R.id.btn_home);
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent home = new Intent(PastData.this, DashboardActivity.class);
+                startActivity(home);
             }
         });
     }

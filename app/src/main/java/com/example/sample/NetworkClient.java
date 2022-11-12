@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkClient {
     private static Retrofit retrofit;
-    private static final String BASE_URL = "https://stonelia-server.herokuapp.com/api/v1/file/";
+    private static final String BASE_URL = "https://stonelia.herokuapp.com/api/v1/file/";
 
 
     public static Retrofit getRetrofit() {
